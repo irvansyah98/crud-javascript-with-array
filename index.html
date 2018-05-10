@@ -1,0 +1,201 @@
+<html>
+    <head>
+        <title></title>
+        <style>
+            #btnTambah, #btnUbah, #btnHapus, #btnCari, #btnSubmitHapus, #btnSimpan, #btnSubmitUbah{
+                color: #fff;
+                background-color: #337ab7;
+                border-color: #2e6da4;
+                padding: 6px 15px;
+                font-size: 12px;
+                text-align: center;
+                white-space: nowrap;
+                vertical-align: middle;
+                cursor: pointer;
+                background-image: none;
+                border: 1px solid transparent;
+            }
+            #myTable {
+                border: 1px solid #000;
+                background-color: transparent;
+                border-collapse: collapse;
+                width: 50%;
+                margin-top: -110px;
+            }
+            footer{
+                margin-top: 300px;
+            }
+        </style>
+    </head>
+    <body>
+        <button onclick="btnTambah()" name="btnTambah" id="btnTambah">Tambah</button>
+        <button onclick="btnUbah()" name="btnUbah" id="btnUbah">Ubah</button>
+        <button name="btnHapus" id="btnHapus" onclick="btnHapus()">Hapus</button>
+        <form name="myForm">    
+            <table border="0" id="tblTambah" name="tblTambah">
+                <tr id="trNRP">
+                    <td>NRP</td>
+                    <td>:</td>
+                    <td><input type="text" id="nrp" name="nrp"></td>
+                    <td>
+                        <input type="button" id="btnCari" onclick="btnCarii()" value="Cari">
+                        <input type="button" id="btnSubmitHapus" onclick="btnSubmitHapuss()" value="Hapus Data">
+                    </td>
+                </tr>
+                <tr id="trNama">
+                    <td>Nama</td>
+                    <td>:</td>
+                    <td><input type="text" id="nama" name="nama"></td>
+                </tr>
+                <tr id="trAlamat">
+                    <td>Alamat</td>
+                    <td>:</td>
+                    <td><input type="text" id="alamat" name="alamat"></td>
+                </tr>
+                <tr id="trBtn">
+                    <td></td>
+                    <td></td>
+                    <td>
+                        <input type="button" id="btnSimpan" onclick="submitSimpan()" value="Simpan">
+                        <input type="button" id="btnSubmitUbah" onclick="submitUbah()" value="Simpan Perubahan">
+                    </td>
+                </tr>
+            </table>
+        </form>
+        <table id="myTable" border="1">
+            <tr id="demo">
+                <td>NRP</td>
+                <td>Nama</td>
+                <td>Alamat</td>
+            </tr>
+        </table>
+        <footer><center>Created by Iervan Firdiansyah 2103171036 1 D3 IT B</center></footer>
+        <script language="javascript">
+            var nrp = [];
+            var nama = [];
+            var alamat = [];
+            var j,k;
+            var l = 0;
+            var tdNRP;
+            var tdNama;
+            var tdAlamat;
+            document.getElementById("tblTambah").style.visibility='hidden';
+            document.getElementById("btnSubmitUbah").style.display='none';
+
+            function btnTambah(){
+                document.getElementById("tblTambah").style.visibility='visible';
+                document.getElementById("btnSubmitUbah").style.display='none';
+                document.getElementById("btnSimpan").style.display='block';
+                document.getElementById("btnCari").style.display='none';
+                document.getElementById("btnSubmitHapus").style.display='none';
+                document.getElementById("trNRP").style.visibility='visible';
+                document.getElementById("trNama").style.visibility='visible';
+                document.getElementById("trAlamat").style.visibility='visible';
+                document.getElementById("trBtn").style.visibility='visible';
+                document.getElementById("myTable").style.marginTop = "20px";
+            }
+
+            function btnUbah(){
+                document.getElementById("tblTambah").style.visibility='visible';
+                document.getElementById("btnSubmitUbah").style.display='block';
+                document.getElementById("btnSimpan").style.display='none';
+                document.getElementById("btnCari").style.display='block';
+                document.getElementById("btnSubmitHapus").style.display='none';
+                document.getElementById("trNRP").style.visibility='visible';
+                document.getElementById("trNama").style.visibility='visible';
+                document.getElementById("trAlamat").style.visibility='visible';
+                document.getElementById("trBtn").style.visibility='visible';
+                document.getElementById("myTable").style.marginTop = "20px";
+                document.getElementById("nrp").value='';
+                document.getElementById("nama").value='';
+                document.getElementById("alamat").value='';
+            }
+
+            function btnHapus(){
+                document.getElementById("tblTambah").style.visibility='visible';
+                document.getElementById("btnSubmitUbah").style.display='none';
+                document.getElementById("btnSimpan").style.display='none';
+                document.getElementById("btnCari").style.display='none';
+                document.getElementById("btnSubmitHapus").style.display='block';
+                document.getElementById("trNRP").style.visibility='visible';
+                document.getElementById("trNama").style.visibility='hidden';
+                document.getElementById("trAlamat").style.visibility='hidden';
+                document.getElementById("trBtn").style.visibility='hidden';
+                document.getElementById("myTable").style.marginTop = "-30px";
+                document.getElementById("nrp").value='';
+                
+            }
+
+            function btnCarii(){
+                for(k = 0; k<=nrp.length; k++){
+                    if(nrp[k] == document.getElementById("nrp").value){
+                        document.getElementById("nama").value = nama[k];
+                        document.getElementById("alamat").value = alamat[k];
+                        tdNama = document.getElementById("nama").value ;
+                        tdAlamat = document.getElementById("alamat").value;
+                    }
+                }
+            }
+
+            function submitUbah(){
+                for(j = 0; j<=nrp.length; j++){
+                    if(nrp[j] == document.getElementById("nrp").value){
+                        var x = document.getElementById("myTable").getElementsByTagName("td");
+                        var m,n;
+                        for (m = 0; m < x.length; m++) {
+                            if(x[m].textContent == tdNama){
+                                x[m].textContent = document.getElementById("nama").value;
+                            }
+                        }
+                        for (n = 0; n < x.length; n++) {
+                            if(x[n].textContent == tdAlamat){
+                                x[n].textContent = document.getElementById("alamat").value;
+                            }
+                        }
+                        nama[j] = document.getElementById("nama").value;
+                        alamat[j] = document.getElementById("alamat").value;
+                    }
+                }
+            }
+
+            function submitSimpan(){
+                var table = document.getElementById("myTable");
+                
+                var row = table.insertRow(-1);
+                var cell1 = row.insertCell(0);
+                var cell2 = row.insertCell(1);
+                var cell3 = row.insertCell(2);
+                    nrp.push(document.getElementById("nrp").value);
+                    nama.push(document.getElementById("nama").value);
+                    alamat.push(document.getElementById("alamat").value);
+
+                    cell1.textContent = document.getElementById("nrp").value;
+                    cell2.textContent = document.getElementById("nama").value;
+                    cell3.textContent = document.getElementById("alamat").value;
+                    row.id = document.getElementById("nrp").value;
+            }
+
+            function btnSubmitHapuss(){
+                for(j = 0; j<=nrp.length; j++){
+                    if(nrp[j] == document.getElementById("nrp").value){
+                        tdNRP = nrp[j];
+                        tdNama = nama[j];
+                        tdAlamat = alamat[j];
+                        nrp.splice([j],1);
+                        nama.splice([j],1);
+                        alamat.splice([j],1);
+
+                        var x = document.getElementById("myTable").getElementsByTagName("td");
+                        var n,o,p;
+                        for (n = 0; n < x.length; n++) {
+                            if(x[n].textContent == tdNRP){
+                                var row2 = document.getElementById(tdNRP);
+                                row2.parentNode.removeChild(row2);
+                            }
+                        }
+                    }
+                }
+            }
+        </script>
+    </body>
+</html>
